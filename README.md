@@ -1,2 +1,2 @@
 # JPA1
-JPA beginner level
+JPA 인프런 김영한님 강의 정리
