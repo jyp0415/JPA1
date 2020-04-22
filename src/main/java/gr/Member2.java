@@ -14,18 +14,19 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="MBR") //name 테이블 명 바꾸고 싶을때 사용 , 
-@SequenceGenerator(name = "member_seq_generator",sequenceName = "member_seq"//매핑할 디비 시퀀스 이름
-, initialValue = 1,allocationSize = 1
-)
-public class Member {
+@Table(name="MBR2") //name 테이블 명 바꾸고 싶을때 사용 , 
+@TableGenerator(name = "MEMBER_SEQ_GENERATOR"
+,table = "MY_SEQUENCES",
+pkColumnValue = "MEMBER_SEQ", allocationSize = 1) 
+public class Member2 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "MEMBER_SEQ_GENERATOR")
 	private Long id;
 	
 	@Column(name="name")
