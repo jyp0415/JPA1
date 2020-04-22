@@ -11,7 +11,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,15 +21,22 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="MBR") //name 테이블 명 바꾸고 싶을때 사용 , 
-@SequenceGenerator(name = "member_seq_generator",sequenceName = "member_seq"//매핑할 디비 시퀀스 이름
-, initialValue = 1,allocationSize = 1
-)
 public class Member {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
+	@GeneratedValue
 	private Long id;
 	
+	@ManyToOne
+	@JoinColumn(name="TEAM_ID") // fk 로 매핑할때 사용 
+	private Team team;
+	
+	
+	public Team getTeam() {
+		return team;
+	}
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 	@Column(name="name")
 	private String username;
 	
