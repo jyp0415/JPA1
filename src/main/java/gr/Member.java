@@ -25,11 +25,9 @@ public class Member {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
 	@ManyToOne
 	@JoinColumn(name="TEAM_ID") // fk 로 매핑할때 사용 
 	private Team team;
-	
 	
 	public Team getTeam() {
 		return team;

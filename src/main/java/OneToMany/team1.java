@@ -1,31 +1,26 @@
-package gr;
+package OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
 @Entity
-public class Team {
-
+public class team1 {
 	
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue
+	@Column(name = "TEAM_ID")
 	private Long id;
 	
-	@OneToMany(mappedBy = "team")
-	private List<Member> members=new ArrayList<Member>();
+	private String name;
 	
-	public List<Member> getMembers() {
-		return members;
-	}
-
-	public void setMembers(List<Member> members) {
-		this.members = members;
-	}
+	@OneToMany
+	@JoinColumn(name = "TEAM_ID")
+	private List<mem> mems = new ArrayList<mem>();
 
 	public Long getId() {
 		return id;
@@ -35,14 +30,20 @@ public class Team {
 		this.id = id;
 	}
 
-	private String name;
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<mem> getMems() {
+		return mems;
+	}
+
+	public void setMems(List<mem> mems) {
+		this.mems = mems;
 	}
 	
 	
