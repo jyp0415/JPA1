@@ -7,8 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import cascade.Child;
-import cascade.Parent;
 
 public class JpaMain {
 
@@ -23,22 +21,19 @@ public class JpaMain {
 		
 		try {
 			
-			Child child1 = new Child();
-			Child child2 = new Child();
+			Book book = new Book();
+			book.setAuthor("jyp");
+			book.setIsbn("123");;
+			book.setName("진짱");
+			book.setPrice(1000);
 			
-			Parent parent = new Parent();
-			parent.addChild(child1);
-			parent.addChild(child2);
-			
-			em.persist(parent);
-			//em.persist(child1);
-			//em.persist(child2);
+			em.persist(book);
 			
 			em.flush();
 			em.clear();
-			Parent fp = em.find(Parent.class, parent.getId());
 			
-			fp.getChildList().remove(0);
+			Book fbook = em.find(Book.class, book.getId());
+			System.out.println(fbook);
 			
 			tx.commit(); // 커밋하는 순간 insert 쿼리 보낸다. 쓰기 지연 
 		}catch (Exception e) {

@@ -2,7 +2,9 @@ package gr;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,13 +24,17 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-public class Member {
+public class Member extends BaseEntity {
 	@Id
 	@GeneratedValue
 	private Long id;
 	@ManyToOne
 	@JoinColumn(name="TEAM_ID") // fk 로 매핑할때 사용 
 	private Team team;
+	@OneToMany(mappedBy = "member")
+	private List<MemberProduct> memberprdoucts = new ArrayList<MemberProduct>() ;
+
+	
 	
 	public Team getTeam() {
 		return team;
@@ -80,15 +87,31 @@ public class Member {
 	public void setRoleType(RoleType roleType) {
 		this.roleType = roleType;
 	}
-	public Date getCreatedDate() {
-		return createdDate;
+	
+	public List<MemberProduct> getMemberprdoucts() {
+		return memberprdoucts;
 	}
+	public void setMemberprdoucts(List<MemberProduct> memberprdoucts) {
+		this.memberprdoucts = memberprdoucts;
+	}
+	public LocalDate getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(LocalDate createDate) {
+		this.createDate = createDate;
+	}
+	public LocalDateTime getTestLocalDateTime() {
+		return testLocalDateTime;
+	}
+	public void setTestLocalDateTime(LocalDateTime testLocalDateTime) {
+		this.testLocalDateTime = testLocalDateTime;
+	}
+	
+	
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-	public Date getLastModifiedDate() {
-		return lastModifiedDate;
-	}
+	
 	public void setLastModifiedDate(Date lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
 	}
